@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Varun Kumar Kusi — AI Agents, RAG & Document Intelligence</title>
+<meta name="description" content="I design and ship AI agents, RAG systems and document-intelligence pipelines for enterprises. Hire me for your next AI project.">
+<meta property="og:title" content="Varun Kumar Kusi — I build AI agents that do the work">
+<meta property="og:description" content="Production LLM systems: agents, RAG, GraphRAG and document extraction on AWS and Azure.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0b1127;--bg2:#121a38;--ink:#e9edff;--mute:#9aa6d4;--line:#27315c;--acc:#7b8cff;--ok:#3ef0c4;--hot:#ff6b9a;color-scheme:dark}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font:400 17px/1.6 "Bricolage Grotesque",system-ui,sans-serif;overflow-x:hidden}
+#net{position:fixed;inset:0;z-index:0;pointer-events:none}
+main,header,footer{position:relative;z-index:1}
+a{color:inherit}
+.wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+nav{position:sticky;top:0;z-index:5;backdrop-filter:blur(12px);background:rgba(11,17,39,.7);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;justify-content:space-between;align-items:center;height:60px}
+/* nav b{font-weight:800;letter-spacing:-.02em} */
+nav b{font-weight:800;letter-spacing:-.02em;font-size:26px}
+nav ul{display:flex;gap:22px;list-style:none;padding:0;font-size:15px;color:var(--mute)}
+nav a{text-decoration:none}nav a:hover{color:var(--ink)}
+.btn{display:inline-block;padding:12px 22px;border-radius:999px;background:var(--acc);color:#0b1127;font-weight:600;text-decoration:none;border:0;cursor:pointer;font:600 16px "Bricolage Grotesque",sans-serif;transition:transform .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(123,140,255,.45)}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+:focus-visible{outline:2px solid var(--ok);outline-offset:3px}
+.hero{display:grid;grid-template-columns:1.05fr 1fr;gap:48px;align-items:center;min-height:calc(100vh - 60px);padding:56px 0}
+h1{font-size:clamp(40px,6vw,76px);line-height:1;letter-spacing:-.04em;font-weight:800}
+h1 em{font-style:normal;background:linear-gradient(90deg,var(--acc),var(--ok));-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{color:var(--mute);font-size:19px;max-width:30em;margin:22px 0 30px}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.status{display:inline-flex;gap:8px;align-items:center;font:500 13px "JetBrains Mono",monospace;color:var(--ok);margin-bottom:20px}
+.status i{width:8px;height:8px;border-radius:50%;background:var(--ok);animation:p 1.6s infinite}
+@keyframes p{50%{opacity:.25;transform:scale(1.6)}}
+.term{background:#080d1e;border:1px solid var(--line);border-radius:14px;box-shadow:0 30px 80px rgba(0,0,0,.5),0 0 0 1px rgba(123,140,255,.12);font:400 13.5px/1.7 "JetBrains Mono",monospace;overflow:hidden}
+.term .bar{display:flex;gap:6px;padding:11px 14px;border-bottom:1px solid var(--line);align-items:center;color:var(--mute);font-size:12px}
+.term .bar i{width:10px;height:10px;border-radius:50%;background:var(--line)}
+.term pre{padding:16px;min-height:330px;white-space:pre-wrap;font:inherit}
+.t-p{color:var(--acc)}.t-t{color:var(--hot)}.t-o{color:var(--ok)}.t-m{color:var(--mute)}
+.cur{display:inline-block;width:8px;height:15px;background:var(--ok);vertical-align:-2px;animation:p 1s steps(2) infinite}
+section{padding:96px 0}
+h2{font-size:clamp(30px,4vw,48px);line-height:1.05;letter-spacing:-.035em;font-weight:800;max-width:16em}
+.lead{color:var(--mute);max-width:36em;margin:16px 0 40px}
+.loop{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative;margin-bottom:20px}
+.loop button{background:var(--bg2);color:var(--mute);border:1px solid var(--line);padding:18px;font:600 17px "Bricolage Grotesque",sans-serif;cursor:pointer;text-align:left;transition:.25s}
+.loop button:first-child{border-radius:14px 0 0 14px}.loop button:last-child{border-radius:0 14px 14px 0}
+.loop button small{display:block;font:400 12px "JetBrains Mono",monospace;margin-top:4px;opacity:.8}
+.loop button[aria-selected=true]{background:var(--acc);color:#0b1127;border-color:var(--acc)}
+.panel{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:28px;display:grid;grid-template-columns:1.2fr 1fr;gap:28px}
+.panel h3{font-size:24px;letter-spacing:-.02em;margin-bottom:8px}
+.panel p{color:var(--mute)}
+.panel ul{list-style:none;padding:0;font:400 14px/2 "JetBrains Mono",monospace}
+.panel li:before{content:"+ ";color:var(--ok)}
+.cases{display:grid;gap:14px}
+details{background:var(--bg2);border:1px solid var(--line);border-radius:14px;transition:border-color .2s}
+details[open]{border-color:var(--acc)}
+summary{list-style:none;cursor:pointer;padding:24px 28px;display:flex;justify-content:space-between;gap:16px;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary h3{font-size:24px;letter-spacing:-.02em;line-height:1.2}
+summary span{color:var(--mute);font-size:15px;display:block;margin-top:2px}
+summary:after{content:"+";font-size:30px;color:var(--acc);transition:transform .25s}
+details[open] summary:after{transform:rotate(45deg)}
+.body{padding:0 28px 28px;display:grid;grid-template-columns:1fr 1fr;gap:24px;color:var(--mute)}
+.body h4{color:var(--ink);font-size:14px;margin-bottom:4px}
+.tags{display:flex;flex-wrap:wrap;gap:8px;grid-column:1/-1}
+.tags b{font:500 12px "JetBrains Mono",monospace;padding:4px 10px;border:1px solid var(--line);border-radius:999px;color:var(--ok)}
+.ask{display:grid;grid-template-columns:1fr 1.3fr;gap:40px;align-items:start}
+.chat{background:#080d1e;border:1px solid var(--line);border-radius:14px;padding:18px;min-height:340px;display:flex;flex-direction:column;gap:12px}
+.log{flex:1;display:flex;flex-direction:column;gap:10px;max-height:300px;overflow:auto}
+.msg{padding:10px 14px;border-radius:12px;max-width:88%;font-size:15px}
+.me{align-self:flex-end;background:var(--acc);color:#0b1127}
+.bot{background:var(--bg2);border:1px solid var(--line)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips button{background:none;border:1px solid var(--line);color:var(--ink);padding:7px 14px;border-radius:999px;cursor:pointer;font:400 14px "Bricolage Grotesque",sans-serif}
+.chips button:hover{border-color:var(--ok);color:var(--ok)}
+.chat form{display:flex;gap:8px}
+.chat input,.contact input,.contact select,.contact textarea{width:100%;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:12px 14px;color:var(--ink);font:400 16px "Bricolage Grotesque",sans-serif}
+.time{border-left:2px solid var(--line);padding-left:28px;display:grid;gap:34px;margin-top:10px}
+.time div{position:relative}
+.time div:before{content:"";position:absolute;left:-36px;top:8px;width:14px;height:14px;border-radius:50%;background:var(--bg);border:2px solid var(--acc)}
+.time small{font:400 13px "JetBrains Mono",monospace;color:var(--ok)}
+.time h3{font-size:21px;letter-spacing:-.02em}
+.time p{color:var(--mute)}
+.stack{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.stack div{background:var(--bg2);border:1px solid var(--line);border-radius:14px;padding:22px}
+.stack h3{font-size:18px;margin-bottom:8px}
+.stack p{color:var(--mute);font-size:15px}
+.contact{display:grid;grid-template-columns:1fr 1.1fr;gap:48px;background:var(--bg2);border:1px solid var(--line);border-radius:22px;padding:48px}
+.contact form{display:grid;gap:12px}
+.contact textarea{min-height:120px;resize:vertical}
+.contact label{font-size:14px;color:var(--mute)}
+.links{display:grid;gap:6px;margin-top:20px;font:400 15px "JetBrains Mono",monospace}
+.links a{color:var(--ok)}
+footer{padding:36px 0;color:var(--mute);font-size:14px;border-top:1px solid var(--line)}
+.reveal{opacity:0;transform:translateY(18px);transition:.7s}
+.reveal.on{opacity:1;transform:none}
+@media(max-width:860px){.hero,.panel,.ask,.contact,.body{grid-template-columns:1fr}.loop{grid-template-columns:1fr 1fr}.loop button{border-radius:0!important}nav ul{display:none}.contact{padding:28px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<canvas id="net" aria-hidden="true"></canvas>
+<nav><div class="wrap"><b>Varun Kumar</b>
+<ul><li><a href="#agents">Agents</a></li><li><a href="#work">Work</a></li><li><a href="#ask">Ask my agent</a></li><li><a href="#stack">Stack</a></li><li><a href="#path">Experience</a></li></ul>
+<a class="btn" href="#contact">Start a project</a></div></nav>
+
+<header class="wrap hero">
+<div>
+<div class="status"><i></i>Taking on new projects</div>
+<h1>I build AI agents that <em>do the work.</em></h1>
+<p class="sub">Agents, RAG and document-intelligence systems that run inside real enterprises, on secure models, with outputs your team can trust. 3+ years shipping LLM systems for insurance and technology clients.</p>
+<div class="cta"><a class="btn" href="#contact">Tell me what to automate</a><a class="btn ghost" href="#work">See the work</a></div>
+</div>
+<div class="term" aria-label="Animated example of an AI agent working through a task">
+<div class="bar"><i></i><i></i><i></i>&nbsp;agent.run — live trace</div>
+<pre id="trace"></pre>
+</div>
+</header>
+
+<main>
+<section id="agents"><div class="wrap reveal">
+<h2>Agents that plan, use tools and check their own work</h2>
+<p class="lead">A chatbot answers. An agent finishes the job: it breaks a goal into steps, pulls the right data, calls your systems and verifies the result before anyone sees it. Click through the loop I design around.</p>
+<div class="loop" role="tablist" id="loop"></div>
+<div class="panel" id="panel"></div>
+</div></section>
+
+<section id="work"><div class="wrap reveal">
+<h2>Production work, not demos</h2>
+<p class="lead">Client names stay confidential. The problems, the architecture and the results of the work are real. Open a case to see how it was built.</p>
+<div class="cases">
+<details open><summary><div><h3>Document extraction pipeline</h3><span>Software & technology client · Deloitte Consulting</span></div></summary>
+<div class="body"><div><h4>Problem</h4>Data trapped in many different document types, each with its own layout, and no single format for downstream systems.</div>
+<div><h4>What I built</h4>An end-to-end pipeline that extracts fields from multiple document types into one standardised schema. I was the sole engineer, owning design, build and deployment.</div>
+<div class="tags"><b>Python</b><b>FastAPI</b><b>AWS Bedrock</b><b>S3</b><b>DynamoDB</b><b>EC2</b></div></div></details>
+<details><summary><div><h3>Business glossary generation with RAG</h3><span>Global insurance client · Deloitte Consulting</span></div></summary>
+<div class="body"><div><h4>Problem</h4>Definitions of business terms were inconsistent and slow to write by hand across large bodies of source material.</div>
+<div><h4>What I built</h4>A RAG pipeline that grounds every definition in retrieved client content so it stays consistent and reviewable. All LLM work ran on enterprise-deployed Azure models, so client data never left the approved environment. I also delivered source-to-target mapping of database tables.</div>
+<div class="tags"><b>RAG</b><b>Azure OpenAI</b><b>Prompt engineering</b><b>Data security</b><b>STTM</b></div></div></details>
+<details><summary><div><h3>Knowledge graphs & GraphRAG</h3><span>Enterprise semantic search · Lead Semantics</span></div></summary>
+<div class="body"><div><h4>Problem</h4>Unstructured documents in varied formats that nobody could query as connected knowledge.</div>
+<div><h4>What I built</h4>Custom spaCy NER models that extract entities and triples to form enterprise knowledge graphs, then GraphRAG for query-based summaries and RAG pipelines on OpenAI, Gemini and Llama 2 with embeddings in Elasticsearch.</div>
+<div class="tags"><b>spaCy</b><b>GraphRAG</b><b>Elasticsearch</b><b>SPARQL</b><b>Gemini</b><b>Llama 2</b></div></div></details>
+</div></div></section>
+
+<section id="ask"><div class="wrap reveal ask">
+<div><h2>Interview my agent</h2><p class="lead">Pick a question, or type your own. It answers from my CV. For the real conversation about your project, use the form below.</p></div>
+<div class="chat"><div class="log" id="log" aria-live="polite"><div class="msg bot">Hi, I’m Varun’s assistant. Ask me anything about his work.</div></div>
+<div class="chips" id="chips"></div>
+<form id="qf"><input id="q" placeholder="Ask about agents, RAG, security…" aria-label="Your question"><button class="btn" type="submit">Ask</button></form></div>
+</div></section>
+
+<section id="stack"><div class="wrap reveal">
+<h2>The toolbox</h2><p class="lead">Chosen per problem, not per trend.</p>
+<div class="stack">
+<div><h3>Agentic AI</h3><p>LangGraph, CrewAI, LangChain, LlamaIndex, tool calling, structured outputs</p></div>
+<div><h3>LLMs</h3><p>Claude API, OpenAI, Gemini, AWS Bedrock, Azure-hosted enterprise models, Llama 2</p></div>
+<div><h3>Retrieval</h3><p>RAG, GraphRAG, FAISS, ChromaDB, Pinecone, Elasticsearch, knowledge graphs, SPARQL</p></div>
+<div><h3>NLP & ML</h3><p>spaCy, Hugging Face, PyTorch, TensorFlow, scikit-learn, NLTK, Gensim</p></div>
+<div><h3>Engineering</h3><p>Python, FastAPI, Flask, Streamlit, SQL, Git, AWS (S3, EC2, Lambda, DynamoDB, SageMaker), Azure</p></div>
+</div></div></section>
+
+<section id="path"><div class="wrap reveal">
+<h2>Experience</h2>
+<div class="time">
+<div><small>Sep 2025 – now</small><h3>AI Engineer, Deloitte Consulting</h3><p>Production LLM systems for insurance and technology clients.</p></div>
+<div><small>Jun 2023 – Aug 2025</small><h3>Data Scientist, Lead Semantics</h3><p>NER, knowledge graphs, GraphRAG and prompt-engineered extraction.</p></div>
+<div><small>Aug 2022 – Mar 2023</small><h3>Data Science Intern, Innomatics Research Labs</h3><p>Sentiment analysis, recommendation systems and statistical analysis.</p></div>
+<div><small>Certified</small><h3>Building with the Claude API · AI Fluency (Anthropic, 2026) · Machine Learning with Python (IBM)</h3></div>
+</div></div></section>
+
+<section id="contact"><div class="wrap reveal"><div class="contact">
+<div><h2>Got a process an agent should own?</h2><p class="lead">Tell me what slows your team down. I’ll reply with how I’d approach it.</p>
+<div class="links"><a href="mailto:varunkumarkusi@gmail.com">varunkumarkusi@gmail.com</a><a href="https://linkedin.com/in/varun0511/" target="_blank" rel="noopener">linkedin.com/in/varun0511</a><span>Hyderabad, India · open to UK roles & remote projects</span></div></div>
+<form id="cf">
+<div><label for="n">Your name</label><input id="n" required></div>
+<div><label for="e">Your email</label><input id="e" type="email" required></div>
+<div><label for="t">What do you need?</label><select id="t"><option>An AI agent or workflow automation</option><option>A RAG or knowledge-search system</option><option>Document data extraction</option><option>Something else</option></select></div>
+<div><label for="m">Tell me about the project</label><textarea id="m" required></textarea></div>
+<button class="btn" type="submit">Send project brief</button>
+<p id="fs" role="status" style="color:var(--ok);font-size:15px"></p>
+</form></div></div></section>
+</main>
+<footer><div class="wrap">© <span id="y"></span> Varun Kumar Kusi · Built by hand, hosted on GitHub Pages.</div></footer>
+
+<script>
+const $=s=>document.querySelector(s);
+$("#y").textContent=new Date().getFullYear();
+
+/* Hero: live agent trace */
+const script=[
+["t-m","# goal: turn 40 mixed insurance PDFs into one clean dataset\n"],
+["t-p","agent › plan\n"],["","  1. classify each document type\n  2. extract fields to schema\n  3. validate and flag low confidence\n"],
+["t-t","tool › classify_document(files=40)\n"],["t-o","  ok · 4 layouts found\n"],
+["t-t","tool › bedrock.extract(schema='policy_v2')\n"],["t-o","  ok · 38 clean, 2 need review\n"],
+["t-p","agent › verify\n"],["","  cross-checking totals against source…\n"],
+["t-t","tool › dynamodb.write(records=38)\n"],["t-o","  ok · saved\n"],
+["t-p","agent › done "],["t-m","— 2 files routed to a human reviewer"]
+];
+const tr=$("#trace");let si=0,ci=0,cur=null;
+function type(){
+  if(si>=script.length){setTimeout(()=>{tr.innerHTML="";si=0;ci=0;type()},4500);return}
+  if(ci===0){cur=document.createElement("span");cur.className=script[si][0];tr.appendChild(cur)}
+  const txt=script[si][1];cur.textContent=txt.slice(0,++ci);
+  if(ci>=txt.length){si++;ci=0;setTimeout(type,si%2?260:120)}else setTimeout(type,14)
+}
+type();
+
+/* Agent loop explorer */
+const steps=[
+["Plan","reason","Break the goal into steps","The agent turns a vague goal into a checklist it can execute, and decides what to do first. Clear planning is what stops agents wandering.",["Goal decomposition","Task routing between specialist agents","Stop conditions and budgets"]],
+["Retrieve","ground","Fetch only what is relevant","Answers are grounded in your own documents through RAG or GraphRAG, so outputs cite real sources instead of guessing.",["Vector and keyword search","Knowledge graphs for connected facts","Permission-aware access"]],
+["Act","tools","Call your systems","Structured tool calls reach databases, APIs and cloud services. Every call has a defined schema so results are predictable.",["Function calling with typed outputs","AWS, Azure and internal APIs","Multi-agent flows in LangGraph or CrewAI"]],
+["Verify","check","Check before you see it","The agent validates its own output against rules and sources, and routes anything uncertain to a person.",["Schema and rule validation","Confidence scoring","Human-in-the-loop review"]]
+];
+const loop=$("#loop"),panel=$("#panel");let auto=true,cur2=0;
+steps.forEach((s,i)=>{const b=document.createElement("button");b.setAttribute("role","tab");b.innerHTML=s[0]+"<small>"+s[1]+"</small>";b.onclick=()=>{auto=false;show(i)};loop.appendChild(b)});
+function show(i){cur2=i;[...loop.children].forEach((b,j)=>b.setAttribute("aria-selected",j===i));const s=steps[i];
+panel.innerHTML="<div><h3>"+s[2]+"</h3><p>"+s[3]+"</p></div><ul>"+s[4].map(x=>"<li>"+x+"</li>").join("")+"</ul>"}
+show(0);setInterval(()=>{if(auto)show((cur2+1)%4)},3500);
+
+/* Ask my agent */
+const kb=[
+{k:["agent","langgraph","crew","autonom"],q:"Do you build AI agents?",a:"Yes, it’s a core focus. Varun works with LangGraph, CrewAI and LangChain, and designs agents around planning, retrieval, tool use and verification."},
+{k:["rag","retriev","search","graph"],q:"What is your RAG experience?",a:"Varun has built RAG pipelines for a global insurance client and at Lead Semantics, plus GraphRAG for query-based summaries, with OpenAI, Gemini and Llama 2 and embeddings in Elasticsearch."},
+{k:["secur","privacy","data","confiden","azure"],q:"Is client data kept secure?",a:"Yes. On the insurance engagement every LLM workload ran on enterprise-deployed Azure models, so data stayed inside the approved environment."},
+{k:["document","extract","pdf","ocr"],q:"Can you extract data from documents?",a:"Yes. Varun was the sole engineer on a pipeline that turns multiple document types into one standard format, using FastAPI, AWS Bedrock, S3, DynamoDB and EC2."},
+{k:["aws","cloud","deploy","bedrock"],q:"Do you deploy to the cloud?",a:"Yes, on AWS (Bedrock, S3, EC2, DynamoDB, Lambda, SageMaker) and Azure, owning design through deployment."},
+{k:["hire","available","rate","price","cost","contact","work with","uk","visa"],q:"How do we start working together?",a:"Send a short brief using the form below, or email varunkumarkusi@gmail.com. Varun is also open to UK roles with visa sponsorship."},
+];
+const log=$("#log");
+function add(t,c){const d=document.createElement("div");d.className="msg "+c;d.textContent=t;log.appendChild(d);log.scrollTop=log.scrollHeight;return d}
+function ask(q){add(q,"me");const d=add("…","bot");const l=q.toLowerCase();
+const hit=kb.find(x=>x.k.some(k=>l.includes(k)))||{a:"I only know Varun’s CV, so I can’t answer that. Try asking about agents, RAG, security or documents, or send him a message below."};
+setTimeout(()=>{d.textContent="";let i=0;const t=setInterval(()=>{d.textContent=hit.a.slice(0,++i);log.scrollTop=log.scrollHeight;if(i>=hit.a.length)clearInterval(t)},12)},450)}
+kb.forEach(x=>{const b=document.createElement("button");b.textContent=x.q;b.onclick=()=>ask(x.q);$("#chips").appendChild(b)});
+$("#qf").onsubmit=e=>{e.preventDefault();const v=$("#q").value.trim();if(v){ask(v);$("#q").value=""}};
+
+/* Contact form: sends via Formspree. Paste your form link below (see README steps). */
+const FORM_URL="https://formspree.io/f/myeebyln"; // e.g. "https://formspree.io/f/abcdwxyz"
+$("#cf").onsubmit=async e=>{e.preventDefault();
+const data={name:$("#n").value,email:$("#e").value,need:$("#t").value,message:$("#m").value};
+const st=$("#fs"),btn=$("#cf button");
+if(!FORM_URL){const body="Name: "+data.name+"\nEmail: "+data.email+"\nNeed: "+data.need+"\n\n"+data.message;
+location.href="mailto:varunkumarkusi@gmail.com?subject="+encodeURIComponent("Project enquiry: "+data.need)+"&body="+encodeURIComponent(body);return}
+btn.disabled=true;st.textContent="Sending…";
+try{const r=await fetch(FORM_URL,{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(data)});
+if(r.ok){st.textContent="Thanks, your brief is in. I’ll reply by email soon.";$("#cf").reset()}
+else st.textContent="Couldn’t send that. Please email varunkumarkusi@gmail.com directly."}
+catch(_){st.textContent="Couldn’t send that. Please email varunkumarkusi@gmail.com directly."}
+btn.disabled=false};
+
+/* Scroll reveal */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("on");io.unobserve(e.target)}}),{threshold:.1});
+document.querySelectorAll(".reveal").forEach(el=>io.observe(el));
+
+/* Neural network background, reacts to cursor */
+const cv=$("#net"),cx=cv.getContext("2d");let W,H,P=[],m={x:-999,y:-999};
+function rs(){W=cv.width=innerWidth;H=cv.height=innerHeight;P=Array.from({length:Math.min(70,W/18|0)},()=>({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.35,vy:(Math.random()-.5)*.35}))}
+addEventListener("resize",rs);addEventListener("mousemove",e=>{m.x=e.clientX;m.y=e.clientY});rs();
+if(!matchMedia("(prefers-reduced-motion:reduce)").matches)(function f(){
+cx.clearRect(0,0,W,H);
+P.forEach((p,i)=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;
+const dm=Math.hypot(p.x-m.x,p.y-m.y);if(dm<150){p.x+=(p.x-m.x)*.012;p.y+=(p.y-m.y)*.012}
+cx.fillStyle=dm<150?"#3ef0c4":"rgba(123,140,255,.7)";cx.beginPath();cx.arc(p.x,p.y,dm<150?2.6:1.8,0,7);cx.fill();
+for(let j=i+1;j<P.length;j++){const q=P[j],d=Math.hypot(p.x-q.x,p.y-q.y);if(d<130){cx.strokeStyle="rgba(123,140,255,"+(.22*(1-d/130))+")";cx.beginPath();cx.moveTo(p.x,p.y);cx.lineTo(q.x,q.y);cx.stroke()}}});
+requestAnimationFrame(f)})();
+</script>
+</body>
+</html>
